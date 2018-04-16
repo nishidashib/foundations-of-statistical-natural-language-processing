@@ -147,3 +147,103 @@ cite:https://ja.wikipedia.org/wiki/%E7%A2%BA%E7%8E%87%E5%A4%89%E6%95%B0
 
 この時、事後確率は観測によって事前確率を修正したものと見なせる。
 このようにして、事前確率を更新していくことをベイズ更新と呼ぶ。
+
+## 2.2 情報理論の要点
+
+PRMLでは1.6に相当
+
+### 2.2.1 エントロピー
+
+起こりにくい事象ほど、
+情報量が多いと考えた場合、
+離散確率変数<img src="https://latex.codecogs.com/gif.latex?x" />に対して情報量<img src="https://latex.codecogs.com/gif.latex?h(x)" />は、
+
+<img src="https://latex.codecogs.com/gif.latex?h(x)=-log_{2}p(x)" />
+
+と、定義出来る。
+
+対数の底は任意であるが、一般的に2を利用する。
+
+これに対して情報量の平均は、
+
+<img src="https://latex.codecogs.com/gif.latex?H[x]=-\sum_{x}p(x)log_{2}p(x)" />
+
+となり、これをエントロピーと呼ぶ。
+
+情報源符号化定理により、エントロピーは最短平均符号長と等しい。
+
+### 2.2.2 結合エントロピーと条件付きエントロピー
+
+エントロピーに対して同時確率、条件付き確率を考えれば良い。
+
+### 2.2.3 相互情報量
+
+2つの確率変数の独立の度合い（依存の度合い）を相互情報量と呼ぶ。
+
+fig 2.6から、
+
+<img src="https://latex.codecogs.com/gif.latex?\begin{align*}&space;I(X;Y)&=H(X)-H(X\mid&space;Y)\\&space;&=H(X)&plus;H(Y)-H(X,Y)\\&space;&=\sum_{x,y}p(x,y)log\frac{p(x,y)}{p(x)p(y)}&space;\end{align*}" />
+
+と定義できる。
+
+このとき、
+
+<img src="https://latex.codecogs.com/gif.latex?H(X)=H(X)-H(X\mid&space;X)=I(X;X)" title="H(X)=H(X)-H(X\mid X)=I(X;X)" />
+
+が成り立ち、エントロピーが自己情報量の説明ともなる。
+
+### 2.2.4 雑音のある通信路モデル
+
+例えば、言語の翻訳は一種の復号化問題と見なすことが出来る。
+
+このとき、翻訳後言語を入力、翻訳元言語を出力とする通信路を考えたなら、
+雑音のある通信路モデルを翻訳問題に適応することが出来る（適切世については異論あり）。
+
+### 2.2.5 相対エントロピーとカルバック・ライブラー・ダイバージェンス
+
+２つの確率分布の差異を以下のように定義する。
+
+<img src="https://latex.codecogs.com/gif.latex?D(p\parallel&space;q)=\sum_{x\in&space;X}p(x)ln\frac{p(x)}{q(x)}" />
+
+これをKLダイバージェンス、または相対エントロピーと呼ぶ。
+
+<img src="https://latex.codecogs.com/gif.latex?p=q" />のとき、
+<img src="https://latex.codecogs.com/gif.latex?D(p\parallel&space;q)=0" />となる。
+
+### 2.2.6 言語との関係：交差エントロピー
+
+言語をモデル化したとき、
+言語特性を考慮したモデルではエントロピーを下げることが出来るので、
+エントロピーはモデルの質の指標と見なせる。
+
+真の確率分布との差、KL距離の最小化をはかることで、モデルを正確にすることが出来る。
+ただし、真の確率分布は未知であるため、数学的に計算できない。
+
+しかし、交差エントロピーを利用することで、近似的に計算できる。
+
+※ 本文間違っている箇所
+
+エルゴード過程 = ergodic process
+
+### 2.2.7 英語のエントロピー
+
+statinary: 時間や位置によって確率分布が変化しない
+
+ergodicity: 集合平均と時間平均が一致する
+
+言語はstatinaryもergodicityも満たさない。
+
+なので、
+
+- n-gram (Chapter 6)
+- Markov chain (Chapter 9)
+
+でモデル化する。
+
+### 2.2.8 パープレキシティ
+
+ここでは、音声認識で交差エントロピーの代わりに利用されると書かれているが。。。
+
+## 2.3 さらに学ぶために
+
+もうね、色々、古いので飛ばしてもいいでしょう。
